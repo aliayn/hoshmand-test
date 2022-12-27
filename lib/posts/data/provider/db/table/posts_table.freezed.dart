@@ -19,7 +19,7 @@ mixin _$PostsTable {
   @HiveField(0)
   int? get userId => throw _privateConstructorUsedError;
   @HiveField(1)
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @HiveField(2)
   String? get title => throw _privateConstructorUsedError;
   @HiveField(3)
@@ -38,7 +38,7 @@ abstract class $PostsTableCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) int? userId,
-      @HiveField(1) int id,
+      @HiveField(1) int? id,
       @HiveField(2) String? title,
       @HiveField(3) String? body});
 }
@@ -57,7 +57,7 @@ class _$PostsTableCopyWithImpl<$Res, $Val extends PostsTable>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? id = null,
+    Object? id = freezed,
     Object? title = freezed,
     Object? body = freezed,
   }) {
@@ -66,10 +66,10 @@ class _$PostsTableCopyWithImpl<$Res, $Val extends PostsTable>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -92,7 +92,7 @@ abstract class _$$_PostsTableCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0) int? userId,
-      @HiveField(1) int id,
+      @HiveField(1) int? id,
       @HiveField(2) String? title,
       @HiveField(3) String? body});
 }
@@ -109,7 +109,7 @@ class __$$_PostsTableCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
-    Object? id = null,
+    Object? id = freezed,
     Object? title = freezed,
     Object? body = freezed,
   }) {
@@ -118,10 +118,10 @@ class __$$_PostsTableCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _$_PostsTable implements _PostsTable {
   @override
   @JsonKey()
   @HiveField(1)
-  final int id;
+  final int? id;
   @override
   @HiveField(2)
   final String? title;
@@ -186,7 +186,7 @@ class _$_PostsTable implements _PostsTable {
 abstract class _PostsTable implements PostsTable {
   const factory _PostsTable(
       {@HiveField(0) final int? userId,
-      @HiveField(1) final int id,
+      @HiveField(1) final int? id,
       @HiveField(2) final String? title,
       @HiveField(3) final String? body}) = _$_PostsTable;
 
@@ -195,7 +195,7 @@ abstract class _PostsTable implements PostsTable {
   int? get userId;
   @override
   @HiveField(1)
-  int get id;
+  int? get id;
   @override
   @HiveField(2)
   String? get title;

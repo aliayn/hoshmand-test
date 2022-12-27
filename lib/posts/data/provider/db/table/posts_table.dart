@@ -9,7 +9,7 @@ part 'posts_table.g.dart';
 class PostsTable with _$PostsTable {
   const factory PostsTable({
     @HiveField(0) int? userId,
-    @HiveField(1) @Default(0) int id,
+    @HiveField(1) @Default(0) int? id,
     @HiveField(2) String? title,
     @HiveField(3) String? body,
   }) = _PostsTable;

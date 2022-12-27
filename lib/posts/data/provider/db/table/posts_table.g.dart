@@ -18,7 +18,7 @@ class PostsTableAdapter extends TypeAdapter<PostsTable> {
     };
     return PostsTable(
       userId: fields[0] as int?,
-      id: fields[1] as int,
+      id: fields[1] as int?,
       title: fields[2] as String?,
       body: fields[3] as String?,
     );
