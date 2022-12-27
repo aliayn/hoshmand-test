@@ -12,3 +12,4 @@ export 'theme/theme_config.dart';
 export 'utils/failure.dart';
 export 'utils/app_logger.dart';
 export 'utils/global_error_handler.dart';
+export 'utils/exceptions.dart';
