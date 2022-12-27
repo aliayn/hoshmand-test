@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hoshmand_test/core/di/injection.dart';
+import 'package:hoshmand_test/core/locale/locale_keys.dart';
 import 'package:hoshmand_test/posts/posts.dart';
 
 class PostsScreen extends StatelessWidget {
@@ -8,11 +11,41 @@ class PostsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider<PostsBloc>(
         create: (context) => inject(),
-        child: Scaffold(body: _buildBody()),
+        child: Scaffold(
+          appBar: _appBar(context),
+          body: _buildContent(),
+        ),
       );
 
-  Widget _buildBody() => BlocListener<PostsBloc, PostsState>(
-        listener: (context, state) {},
-        child: Container(),
+  AppBar _appBar(BuildContext context) => AppBar(
+        centerTitle: true,
+        title: Text(
+          LocaleKeys.postHeader.tr,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
       );
+
+  Widget _buildContent() => BlocListener<PostsBloc, PostsState>(
+        listener: (context, state) {},
+        child: _buildBody(),
+      );
+
+  Widget _buildBody() => BlocBuilder<PostsBloc, PostsState>(
+        buildWhen: (previous, current) =>
+            current.whenOrNull(loading: () => true, setPostList: (posts) => true) ?? false,
+        builder: (context, state) {
+          return state.maybeWhen(
+            loading: () => _loading(),
+            orElse: (() => const SizedBox()),
+          );
+        },
+      );
+
+  Widget _loading() {
+    return const SizedBox.expand(
+      child: Center(
+        child: CupertinoActivityIndicator(),
+      ),
+    );
+  }
 }
