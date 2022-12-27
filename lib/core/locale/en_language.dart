@@ -1,5 +1,3 @@
-
-
 import 'package:hoshmand_test/core/locale/locale_keys.dart';
 
 class EnglishLanguage {

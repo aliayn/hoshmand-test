@@ -18,10 +18,15 @@ dependencies:
   bloc: ^8.1.0
   flutter_bloc: ^8.0.1
   freezed_annotation:
+  equatable: 
 
   # dependency injection
   injectable: ^1.5.3
   get_it: ^7.2.0
+
+  # internet connection
+  dio: ^4.0.4
+  json_annotation: ^4.5.0
 
   # layout management
   get: ^4.6.5
@@ -48,6 +53,7 @@ dev_dependencies:
   injectable_generator:
 
   freezed:
+  json_serializable:
 
   bdd_widget_test: ^1.4.2
 
