@@ -9,5 +9,5 @@ class ApiRepository {
 
   ApiRepository(this._provider);
 
-  Future<PostsModel> getPosts() => _provider.getPosts();
+  Future<List<PostsModel>> getPosts() => _provider.getPosts();
 }

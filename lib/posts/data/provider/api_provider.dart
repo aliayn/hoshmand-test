@@ -9,5 +9,5 @@ class ApiProvider {
 
   ApiProvider(this._client);
 
-  Future<PostsModel> getPosts() => _client.getPosts();
+  Future<List<PostsModel>> getPosts() => _client.getPosts();
 }

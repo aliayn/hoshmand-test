@@ -8,5 +8,5 @@ class ApiService {
 
   ApiService(this._repository);
 
-  Future<PostsModel> getPosts() => _repository.getPosts();
+  Future<List<PostsModel>> getPosts() => _repository.getPosts();
 }

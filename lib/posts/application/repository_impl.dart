@@ -12,20 +12,22 @@ class RepositoryImpl extends Repository {
   RepositoryImpl(this._apiService);
 
   @override
-  Future<Either<Failure, List<Posts>>> getApiData() {
-    // TODO: implement getApiData
-    throw UnimplementedError();
+  Future<Either<Failure, List<Posts>>> getApiData() async {
+    try {
+      final posts = await _apiService.getPosts();
+      return Right(posts.map<Posts>((e) => Posts(userId: e.userId, id: e.id, title: e.title, body: e.body)).toList());
+    } on Exception catch (e) {
+      return Left(Failure(e.toString()));
+    }
   }
 
   @override
   Future<Either<Failure, List<Posts>>> getDBData() {
-    // TODO: implement getDBData
     throw UnimplementedError();
   }
 
   @override
   Future<Either<Failure, void>> updateDBData(List<Posts> posts) {
-    // TODO: implement updateDBData
     throw UnimplementedError();
   }
 }

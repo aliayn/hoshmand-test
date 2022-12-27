@@ -11,7 +11,7 @@ class Api {
 
 @lazySingleton
 class ApiClient with ApiClientHelper {
-  Future<PostsModel> getPosts() async {
+  Future<List<PostsModel>> getPosts() async {
     try {
       final result = await dio.get(Api.posts);
       return result.data.map<PostsModel>((e) => PostsModel.fromJson(e)).toList();
