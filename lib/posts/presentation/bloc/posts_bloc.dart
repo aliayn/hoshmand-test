@@ -15,7 +15,9 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   final GetDBDataUseCase _dbDataUseCase;
   final UpdateDBDataUseCase _updateDBDataUseCase;
 
-  PostsBloc(this._apiDataUseCase, this._dbDataUseCase, this._updateDBDataUseCase) : super(const _Initial()) {
+  PostsBloc(
+      this._apiDataUseCase, this._dbDataUseCase, this._updateDBDataUseCase)
+      : super(const _Initial()) {
     on<PostsEvent>((event, emit) {});
   }
 }
