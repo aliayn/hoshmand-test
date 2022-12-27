@@ -10,7 +10,7 @@ class GetDBDataUseCase extends BaseUseCase<List<Posts>, NoParams> {
 
   GetDBDataUseCase(this._repository);
   @override
-  Future<Either<Failure, List<Posts>>> call(void param) {
+  Future<Either<Failure, List<Posts>>> call(NoParams param) {
     return _repository.getDBData();
   }
 }
