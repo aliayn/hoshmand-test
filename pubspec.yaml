@@ -42,6 +42,9 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+  # build runner
+  build_runner:  
+
   injectable_generator:
 
   freezed:
