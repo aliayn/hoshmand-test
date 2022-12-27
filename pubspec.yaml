@@ -24,6 +24,10 @@ dependencies:
   injectable: ^1.5.3
   get_it: ^7.2.0
 
+  # database
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
+
   # internet connection
   dio: ^4.0.4
   json_annotation: ^4.5.0
@@ -54,6 +58,7 @@ dev_dependencies:
 
   freezed:
   json_serializable:
+  hive_generator: 
 
   bdd_widget_test: ^1.4.2
 
