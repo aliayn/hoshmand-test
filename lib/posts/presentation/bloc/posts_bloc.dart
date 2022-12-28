@@ -32,9 +32,9 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     emit(const PostsState.initial());
     emit(const PostsState.loading());
     final localPosts = await _dbDataUseCase.call(NoParams());
-    localPosts.fold(
+    await localPosts.fold<FutureOr<void>>(
       (failure) => _setError(emit, failure),
-      (posts) => _getApiPosts(emit, posts),
+      (posts) async => await _getApiPosts(emit, posts),
     );
   }
 
@@ -43,15 +43,15 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       emit(PostsState.setPostList(localPosts));
     }
     final apiPosts = await _apiDataUseCase.call(NoParams());
-    apiPosts.fold(
+    await apiPosts.fold<FutureOr<void>>(
       (failure) => _setError(emit, failure),
-      (posts) => _updateDatabase(emit, posts),
+      (posts) async => await _updateDatabase(emit, posts),
     );
   }
 
   Future<void> _updateDatabase(Emitter<PostsState> emit, List<Posts> apiPosts) async {
     emit(PostsState.setPostList(apiPosts));
-    _updateDBDataUseCase.call(apiPosts);
+    await _updateDBDataUseCase.call(apiPosts);
   }
 
   void _setError(Emitter<PostsState> emit, Failure failure) {

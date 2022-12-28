@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hoshmand_test/core/di/injection.dart';
-import 'package:hoshmand_test/core/locale/locale_keys.dart';
+import 'package:hoshmand_test/core/core.dart';
 import 'package:hoshmand_test/posts/domain/entity/posts/posts.dart';
 import 'package:hoshmand_test/posts/posts.dart';
+import 'package:hoshmand_test/posts/presentation/widget/post_item.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => BlocProvider<PostsBloc>(
-        create: (context) => inject(),
+        create: (context) => inject()..add(const PostsEvent.started()),
         child: Scaffold(
           appBar: _appBar(context),
           body: _buildContent(),
@@ -22,21 +22,36 @@ class PostsScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           LocaleKeys.postHeader.tr,
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.white,
+              ),
         ),
       );
 
   Widget _buildContent() => BlocListener<PostsBloc, PostsState>(
-        listener: (context, state) {},
+        listener: (context, state) => state.whenOrNull(
+          error: (message) => showErrorMessage(context, message),
+        ),
         child: _buildBody(),
+      );
+
+  void showErrorMessage(BuildContext context, String error) => showErrorSnackBar(
+        context: context,
+        message: error,
       );
 
   Widget _buildBody() => BlocBuilder<PostsBloc, PostsState>(
         buildWhen: (previous, current) =>
-            current.whenOrNull(loading: () => true, setPostList: (posts) => true) ?? false,
+            current.whenOrNull(
+              loading: () => true,
+              setPostList: (posts) => true,
+              error: (message) => true,
+            ) ??
+            false,
         builder: (context, state) => state.maybeWhen(
           loading: () => _loading(),
           setPostList: (posts) => _showPostsList(posts),
+          error: (message) => _retry(message),
           orElse: (() => const SizedBox()),
         ),
       );
@@ -47,7 +62,35 @@ class PostsScreen extends StatelessWidget {
         ),
       );
 
-  Widget _showPostsList(List<Posts> posts) {
-    return ListView();
-  }
+  Widget _retry(String error) => Builder(
+      builder: (context) => SizedBox.expand(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                      onPressed: (() {
+                        context.read<PostsBloc>().add(const PostsEvent.retry());
+                      }),
+                      child: Text(
+                        LocaleKeys.postRetry.tr,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      error,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ));
+
+  Widget _showPostsList(List<Posts> posts) => ListView.builder(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: ((context, index) => PostItem(posts: posts[index])),
+      );
 }
