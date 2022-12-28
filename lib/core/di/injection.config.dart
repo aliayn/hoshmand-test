@@ -21,9 +21,10 @@ import '../../posts/domain/repository/repository.dart' as _i11;
 import '../../posts/domain/use_case/get_api_data_use_case.dart' as _i14;
 import '../../posts/domain/use_case/get_db_data_use_case.dart' as _i15;
 import '../../posts/domain/use_case/update_db_data_use_case.dart' as _i13;
-import '../../posts/presentation/bloc/posts_bloc.dart'
-    as _i16; // ignore_for_file: unnecessary_lambdas
+import '../../posts/presentation/bloc/posts_bloc.dart' as _i16;
 
+const String _prod = 'prod';
+// ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
 _i1.GetIt $initGetIt(
@@ -50,10 +51,13 @@ _i1.GetIt $initGetIt(
       () => _i9.DataBaseRepository(get<_i8.DatabaseProvider>()));
   gh.lazySingleton<_i10.DatabaseService>(
       () => _i10.DatabaseService(get<_i9.DataBaseRepository>()));
-  gh.lazySingleton<_i11.Repository>(() => _i12.RepositoryImpl(
-        get<_i6.ApiService>(),
-        get<_i10.DatabaseService>(),
-      ));
+  gh.lazySingleton<_i11.Repository>(
+    () => _i12.RepositoryImpl(
+      get<_i6.ApiService>(),
+      get<_i10.DatabaseService>(),
+    ),
+    registerFor: {_prod},
+  );
   gh.lazySingleton<_i13.UpdateDBDataUseCase>(
       () => _i13.UpdateDBDataUseCase(get<_i11.Repository>()));
   gh.lazySingleton<_i14.GetApiDataUseCase>(

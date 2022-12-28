@@ -7,6 +7,7 @@ import 'package:hoshmand_test/posts/domain/entity/posts/posts.dart';
 import 'package:hoshmand_test/posts/domain/repository/repository.dart';
 import 'package:injectable/injectable.dart';
 
+@prod
 @LazySingleton(as: Repository)
 class RepositoryImpl extends Repository {
   final ApiService _apiService;

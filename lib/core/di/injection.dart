@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import 'injection.config.dart';
 
-final _getIt = GetIt.instance;
-T inject<T extends Object>() => _getIt.call();
+final GetIt getIt = GetIt.instance;
+T inject<T extends Object>() => getIt.call();
 
 @injectableInit
-void configureDependencies() => $initGetIt(_getIt);
+void configureDependencies(String env) => $initGetIt(getIt, environment: env);
