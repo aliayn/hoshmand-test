@@ -5,9 +5,11 @@ Recruitment Test of Behine Sazan Hoshamnd
 ## Getting Started
 
 
-This repo is created based on getting posts from [api](https://jsonplaceholder.typicode.com/posts) and then store in the local database.
-Also the used architecture for create thi repo is clean and ddd.
-BDD-test is provided for test scenarios in the project.
+The repository is created by getting posts from [API](https://jsonplaceholder.typicode.com/posts) and storing them in the local database.
+
+Additionally, the architecture used for creating this repository is clean and DDD-based.
+
+The project includes BDD-tests for testing scenarios.
 
 
 ## Stack
