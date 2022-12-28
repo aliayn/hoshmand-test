@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hoshmand_test/core/di/injection.dart';
 import 'package:hoshmand_test/core/locale/locale_keys.dart';
+import 'package:hoshmand_test/posts/domain/entity/posts/posts.dart';
 import 'package:hoshmand_test/posts/posts.dart';
 
 class PostsScreen extends StatelessWidget {
@@ -33,19 +34,20 @@ class PostsScreen extends StatelessWidget {
   Widget _buildBody() => BlocBuilder<PostsBloc, PostsState>(
         buildWhen: (previous, current) =>
             current.whenOrNull(loading: () => true, setPostList: (posts) => true) ?? false,
-        builder: (context, state) {
-          return state.maybeWhen(
-            loading: () => _loading(),
-            orElse: (() => const SizedBox()),
-          );
-        },
+        builder: (context, state) => state.maybeWhen(
+          loading: () => _loading(),
+          setPostList: (posts) => _showPostsList(posts),
+          orElse: (() => const SizedBox()),
+        ),
       );
 
-  Widget _loading() {
-    return const SizedBox.expand(
-      child: Center(
-        child: CupertinoActivityIndicator(),
-      ),
-    );
+  Widget _loading() => const SizedBox.expand(
+        child: Center(
+          child: CupertinoActivityIndicator(),
+        ),
+      );
+
+  Widget _showPostsList(List<Posts> posts) {
+    return ListView();
   }
 }
