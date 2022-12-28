@@ -10,6 +10,7 @@ class AppService {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await Hive.initFlutter();
     Hive.registerAdapter(PostsTableAdapter());
+    await Hive.openBox<PostsTable>('Posts');
     configureDependencies();
   }
 }
